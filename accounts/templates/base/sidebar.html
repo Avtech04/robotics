@@ -25,7 +25,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/" class="nav-link active">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
@@ -36,7 +36,7 @@
 
 <!-- 1. Events-->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link">
+            <a href="/" class="nav-link {% block event-active %}{% endblock event-active %}">
               <i class="nav-icon fas fa-calendar"></i>
               <p>
                 Events
@@ -51,7 +51,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/" class="nav-link">
+                <a href="/events" class="nav-link">
                   <i class="far fa fa-list nav-icon"></i>
                   <p>Event List</p>
                 </a>
