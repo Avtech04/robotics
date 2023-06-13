@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from datetime import datetime
-from events.models import Event
+from events.models import Event,Participant
 from django.http import HttpResponse
 
 
@@ -75,7 +75,7 @@ def Update_event(request, id):
     except Exception as e:
         return HttpResponse(f"An error occurred: {e}")
 
-def Delete_event( id):
+def Delete_event(request, id):
     try:
         events = Event.objects.filter(id=id)
         events.delete()
@@ -91,3 +91,20 @@ def search_event(request):
         return render(request, 'search.html', params)
     except Exception as e:
         return HttpResponse(f"An error occurred: {e}")
+
+def register_participant(request):
+    if request.method == 'POST':
+        # Get the form data from the POST request
+        name = request.POST.get('recipient-name')
+        email = request.POST.get('recipient-email')
+
+        # Create a new Participant instance
+        participant = Participant(name=name, email=email)
+        participant.save()
+
+        # Return a success response
+        return HttpResponse('Participant registered successfully.')
+
+    else:
+        # If the request method is not POST, render the template with the modal
+        return render(request, 'events.html')
