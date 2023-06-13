@@ -278,10 +278,10 @@
 							</span>
 						</td>
                         <td><a class='mx-4' href="/event/{{event.id}}">{{event.event_name}}</a></td>
-                        <td>{{event.event_desc | slice:20 }}...</td>
+                        <td>{{event.event_description | slice:20 }}...</td>
 						<td>{{event.slug}}</td>
                         <td>{{event.event_createdby}}</td>
-                        <td>{{event.time}}</td>
+                        <td>{{event.time_of_creation}}</td>
                         <td>
                             <a href="#editEmployeeModal-{{forloop.counter}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal-{{forloop.counter}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -358,7 +358,7 @@
 						</div>
 						<div class="form-group">
                             <label>Description</label>
-							<textarea name='event_desc' class="form-control" required>{{i.event_desc}}</textarea>
+							<textarea name='event_desc' class="form-control" required>{{i.event_description}}</textarea>
 						</div>
                         <div class="form-group">
                             <label>Tag</label>

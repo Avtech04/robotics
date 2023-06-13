@@ -43,7 +43,7 @@
                 </div>
                 <div class="card-body">
                   Organizer : {{event.event_createdby}}
-                  <p class="card-text">Description : {{event.event_desc | slice:50}}...</p>
+                  <p class="card-text">Description : {{event.event_description | slice:50}}...</p>
                   
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Register now</button>
 
@@ -82,7 +82,7 @@
                   <a class='mx-4' href="/events/event/{{event.id}}">read more</a>
                 </div>
                 <div class="card-footer text-muted">
-                    last updated : {{event.time}}
+                    last updated : {{event.time_of_creation}}
                 </div>
               </div>
 

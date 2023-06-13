@@ -1,6 +1,13 @@
 from django.contrib import admin
-from events.models import Event,Eventuser
+from .models import Event, Participant
 
-# Register your models here.
-admin.site.register(Event)
-admin.site.register(Eventuser)
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('event_name', 'slug', 'time_of_creation')
+    search_fields = ('event_name', 'slug')
+    filter_horizontal = ('participants',)
+
+@admin.register(Participant)
+class ParticipantAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email')
+    search_fields = ('name', 'email')

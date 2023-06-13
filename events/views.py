@@ -3,6 +3,7 @@ from datetime import datetime
 from events.models import Event
 from django.http import HttpResponse
 
+
 def event(request):
     try:
         events = Event.objects.all()
@@ -30,16 +31,15 @@ def create_event(request):
 def ADD_event(request):
     try:
         if request.method == 'POST':
-            event_title = request.POST.get('event_title')
-            event_desc = request.POST.get('event_desc')
+            event_name = request.POST.get('event_title')
+            event_description = request.POST.get('event_desc')
             slug = request.POST.get('slug')
-            event_createdby = request.POST.get('event_createdby')
-
+            event_createdby= request.POST.get('event_createdby')
             ev = Event(
-                event_name=event_title,
-                event_desc=event_desc,
+                event_name=event_name,
+                event_description=event_description,
                 slug=slug,
-                event_createdby=event_createdby,
+                event_createdby = event_createdby,
             )
             ev.save()
             return redirect('create_event')
@@ -57,18 +57,17 @@ def Edit_event(request):
 def Update_event(request, id):
     try:
         if request.method == 'POST':
-            event_title = request.POST.get('event_title')
-            event_desc = request.POST.get('event_desc')
+            event_name = request.POST.get('event_title')
+            event_description = request.POST.get('event_desc')
             slug = request.POST.get('slug')
-            event_createdby = request.POST.get('event_createdby')
-
+            event_createdby= request.POST.get('event_createdby')
             ev = Event(
                 id=id,
-                event_name=event_title,
-                event_desc=event_desc,
+                event_name=event_name,
+                event_description=event_description,
                 slug=slug,
-                time=datetime.now(),
-                event_createdby=event_createdby,
+                event_createdby = event_createdby,
+                time_of_creation=datetime.now(),
             )
             ev.save()
             return redirect('create_event')
@@ -76,11 +75,10 @@ def Update_event(request, id):
     except Exception as e:
         return HttpResponse(f"An error occurred: {e}")
 
-def Delete_event(request, id):
+def Delete_event( id):
     try:
         events = Event.objects.filter(id=id)
         events.delete()
-        context = {'events': events}
         return redirect('create_event')
     except Exception as e:
         return HttpResponse(f"An error occurred: {e}")
