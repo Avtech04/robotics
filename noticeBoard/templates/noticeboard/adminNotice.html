@@ -1,0 +1,66 @@
+    {% extends 'home.html' %}
+
+    {% block title %}Notice{% endblock %}
+
+    {% block content %}
+
+
+      <div class="container mt-5 border-bottom border-primary" >
+        <div class="row justify-content-md-center">
+          
+          <div class="col-md-auto text-danger ">
+            NOTICE BOARD
+            
+          </div>
+
+        </div>
+        </div>
+        <div class="mt-5">
+          {%if conts %}
+          {% for cont in conts reversed %}
+
+          <div class="container rounded mt-2 border border-radius-rounded border-success" > 
+            {% comment %} <div class="row justify-content-md-left"> {% endcomment %}
+            
+             <div class="col-md-15 p-3">
+              <div class='d-flex justify-content-between'>
+                <div class="text-warning pb-3">
+                  {{ cont.date }}
+                </div>
+
+                 {% comment %} Only Admin code  {% endcomment %}
+                <div class="text-warning pb-3">
+                  <form action='{% url 'broadcastdata' cont.id %}' method="POST" class='d-inline'>
+                    {%csrf_token%}
+                    <input type="submit" class='btn btn-success btn-sm' value='Broadcast'>
+                  </form>
+                  <a href="{% url 'updatedata' cont.id %}" class="btn btn-warning btn-sm">Update</a>
+                  <form action='{% url 'deletedata' cont.id %}' method="POST" class='d-inline'>
+                    {%csrf_token%}
+                    <input type="submit" class='btn btn-danger btn-sm' value='Delete'>
+                  </form>
+                </div>
+                {% comment %} only admin  {% endcomment %}
+
+              </div>
+              {{ cont.notice }}
+              </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="container text-center alert alert-warning"> No Notice Available </div>
+        {% endif %}
+ 
+          {% comment %} only admin  {% endcomment %}
+          {% comment %} <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class='mt-5 ml-4 border-bottom' for="notice">[+] Add a new Notice</label>
+              {{form.as_p}}
+            <button action="POST" id="submit" type= "submit" class="btn btn-primary ml-4">Submit</button>
+            </div>
+          </form> {% endcomment %}
+          {% comment %} only admin  {% endcomment %}
+
+      {% endblock %}

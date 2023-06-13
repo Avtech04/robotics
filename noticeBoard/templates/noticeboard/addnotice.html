@@ -1,0 +1,15 @@
+{% extends 'home.html' %}
+{% block title %}Add Notice{% endblock  %}
+
+{% block content %}
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class='mt-5 ml-4 border-bottom' for="notice">[+]Add New Notice</label>
+        {{form.as_p}}
+    <button action="POST" id="submit" type= "submit" class="btn btn-success ml-4">Submit</button>
+    <a href="{% url 'adminNotice' %}" class='btn btn-primary'>Back to Notice Board</a>
+    </div>
+</form>
+
+{% endblock  %}
