@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'events.apps.EventsConfig',
+    'noticeBoard.apps.NoticeboardConfig',
 ]
 
 MIDDLEWARE = [
@@ -58,8 +60,9 @@ ROOT_URLCONF = 'src.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR,"events/templates/events",
-                 BASE_DIR,"accounts/templates"],
+        'DIRS': [BASE_DIR,"noticeBoard/templates/noticeBoard",
+                 BASE_DIR,"accounts/templates",
+                 BASE_DIR, "events/templates/events"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
