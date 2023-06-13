@@ -57,12 +57,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'src.urls'
 
-TEMPLATES = [
+TEMPLATES = [ 
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR,"noticeBoard/templates/noticeBoard",
-                 BASE_DIR,"events/templates/events",
-                 BASE_DIR,"accounts/templates",
+        'DIRS': [  os.path.join(BASE_DIR, "accounts/templates"),
+                    os.path.join(BASE_DIR, "events/templates/events"),
+                    os.path.join(BASE_DIR, "noticeBoard/templates/noticeBoard"),
+                BASE_DIR,
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -134,6 +135,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-
+EMAIL_HOST_USER = 'SECRET_KEY'
+EMAIL_HOST_PASSWORD = 'SECRET_PASSWORD'
