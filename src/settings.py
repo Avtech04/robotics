@@ -61,14 +61,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR,"noticeBoard/templates/noticeBoard",
-<<<<<<< HEAD
-                 BASE_DIR,"accounts/templates",
-                 BASE_DIR, "events/templates/events"],
-=======
                  BASE_DIR,"events/templates/events",
                  BASE_DIR,"accounts/templates",
                  ],
->>>>>>> main
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

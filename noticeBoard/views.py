@@ -29,6 +29,7 @@ def addNotice(request):
             con= notice.cleaned_data['notice']
             adminNotice = AdminNotice(notice=con, date=datetime.today())
             adminNotice.save() 
+            messages.success(request, 'Notice has been Posted!')
     else:
         notice = noticeaddition()
     return render(request, 'addnotice.html', {'form' : notice})
@@ -53,6 +54,7 @@ def delete_data(request,id):
     if request.method == "POST":
         pi = AdminNotice.objects.get(pk=id)
         pi.delete()
+        messages.success(request, 'Notice has been Deleted!')
         return HttpResponseRedirect(reverse('adminNotice'))
     
 
