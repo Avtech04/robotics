@@ -1,7 +1,7 @@
-{% extends 'base_event.html' %}
+{% extends 'home.html' %}
 {% block title %}Events{% endblock title %}
-{% block events %}active{% endblock events %}
-{% block body %}
+{% block header-title %}Events{% endblock header-title %}
+{% block content %}
 <div class="container-fluid">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -38,10 +38,11 @@
 
             <div class="card text-center my-2">
                 <div class="card-header">
-                    Organizer : {{event.event_createdby}}
+                  <h4><a href="/events/event/{{event.id}}">{{event.event_name}}</a></h4>
+                    
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title"><a href="/events/event/{{event.id}}">{{event.event_name}}</a></h5>
+                  Organizer : {{event.event_createdby}}
                   <p class="card-text">Description : {{event.event_desc | slice:50}}...</p>
                   
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Register now</button>
@@ -91,4 +92,4 @@
     </div>
 </div>
 
-{% endblock body %}
+{% endblock content %}

@@ -8,11 +8,14 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
+from events.models import Event
 # Create your views here.
 
 @login_required
 def home(request):
-    return render(request , 'dashboard.html')
+    events = Event.objects.all()
+    context = {'events': events}
+    return render(request , 'dashboard.html',context)
 
 
 

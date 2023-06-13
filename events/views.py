@@ -1,73 +1,95 @@
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render, redirect
 from datetime import datetime
 from events.models import Event
-# Create your views here.
-def event(request):
-    events = Event.objects.all()
-    context = {'events':events}
-    return render(request, 'events.html',context)
+from django.http import HttpResponse
 
-def eventpost(request,id):
-    event = Event.objects.filter(id=id).first()
-    context = {'event':event}
-    return render(request,'event.html',context)
+def event(request):
+    try:
+        events = Event.objects.all()
+        context = {'events': events}
+        return render(request, 'events.html', context)
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {e}")
+
+def eventpost(request, id):
+    try:
+        event = Event.objects.filter(id=id).first()
+        context = {'event': event}
+        return render(request, 'event.html', context)
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {e}")
 
 def create_event(request):
-    events = Event.objects.all()
-    context = {'events':events}
-    return render(request,'create_event.html',context)
+    try:
+        events = Event.objects.all()
+        context = {'events': events}
+        return render(request, 'create_event.html', context)
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {e}")
 
 def ADD_event(request):
-    if request.method== 'POST':
-        event_title = request.POST.get('event_title')
-        event_desc = request.POST.get('event_desc')
-        slug = request.POST.get('slug')
-        event_createdby = request.POST.get('event_createdby')
+    try:
+        if request.method == 'POST':
+            event_title = request.POST.get('event_title')
+            event_desc = request.POST.get('event_desc')
+            slug = request.POST.get('slug')
+            event_createdby = request.POST.get('event_createdby')
 
-        ev=Event(
-            event_name=event_title,
-            event_desc=event_desc,
-            slug=slug,
-            event_createdby=event_createdby,
-        )
-        ev.save()
-        return redirect('create_event')
+            ev = Event(
+                event_name=event_title,
+                event_desc=event_desc,
+                slug=slug,
+                event_createdby=event_createdby,
+            )
+            ev.save()
+            return redirect('create_event')
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {e}")
 
 def Edit_event(request):
-    events = Event.objects.all()
-    context = {'events':events}
-    return redirect(request,'create_event',context)
+    try:
+        events = Event.objects.all()
+        context = {'events': events}
+        return redirect(request, 'create_event', context)
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {e}")
 
-def Update_event(request,id):
-    if request.method == 'POST':
-        event_title = request.POST.get('event_title')
-        event_desc = request.POST.get('event_desc')
-        slug = request.POST.get('slug')
-        event_createdby = request.POST.get('event_createdby')
+def Update_event(request, id):
+    try:
+        if request.method == 'POST':
+            event_title = request.POST.get('event_title')
+            event_desc = request.POST.get('event_desc')
+            slug = request.POST.get('slug')
+            event_createdby = request.POST.get('event_createdby')
 
-        ev=Event(
-            id=id,
-            event_name=event_title,
-            event_desc=event_desc,
-            slug=slug,
-            time=datetime.now(),
-            event_createdby=event_createdby,
-        )
-        ev.save()
+            ev = Event(
+                id=id,
+                event_name=event_title,
+                event_desc=event_desc,
+                slug=slug,
+                time=datetime.now(),
+                event_createdby=event_createdby,
+            )
+            ev.save()
+            return redirect('create_event')
+        return redirect(request, 'create_event.html')
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {e}")
+
+def Delete_event(request, id):
+    try:
+        events = Event.objects.filter(id=id)
+        events.delete()
+        context = {'events': events}
         return redirect('create_event')
-    return redirect(request,'create_event.html')
-
-def Delete_event(request,id):
-    events=Event.objects.filter(id=id)
-    events.delete()
-    context = {'events':events}
-    return redirect('create_event')
-
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {e}")
 
 def search_event(request):
-    query = request.GET['query']
-    events = Event.objects.filter(event_name__icontains=query)
-    params = {'events':events}
-
-    return render(request,'search.html',params)
-     
+    try:
+        query = request.GET['query']
+        events = Event.objects.filter(event_name__icontains=query)
+        params = {'events': events}
+        return render(request, 'search.html', params)
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {e}")
