@@ -1,4 +1,4 @@
-    {% extends 'base.html' %}
+    {% extends 'home.html' %}
 
     {% block title %}Notice{% endblock %}
 
@@ -53,14 +53,14 @@
         {% endif %}
  
           {% comment %} only admin  {% endcomment %}
-          <form method="POST" action="">
+          {% comment %} <form method="POST" action="">
             {% csrf_token %}
             <div class="form-group">
                 <label class='mt-5 ml-4 border-bottom' for="notice">[+] Add a new Notice</label>
               {{form.as_p}}
             <button action="POST" id="submit" type= "submit" class="btn btn-primary ml-4">Submit</button>
             </div>
-          </form>
+          </form> {% endcomment %}
           {% comment %} only admin  {% endcomment %}
 
       {% endblock %}

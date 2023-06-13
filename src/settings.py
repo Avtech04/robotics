@@ -61,8 +61,14 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR,"noticeBoard/templates/noticeBoard",
+<<<<<<< HEAD
                  BASE_DIR,"accounts/templates",
                  BASE_DIR, "events/templates/events"],
+=======
+                 BASE_DIR,"events/templates/events",
+                 BASE_DIR,"accounts/templates",
+                 ],
+>>>>>>> main
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,6 +139,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'SECRET_KEY'
-EMAIL_HOST_PASSWORD = 'SECRET_PASSWORD'
+EMAIL_HOST_USER = 'kk235964@gmail.com'
+EMAIL_HOST_PASSWORD = 'xfitggcqclebmdpn'
 
