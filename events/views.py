@@ -1,10 +1,7 @@
 from django.shortcuts import render,redirect,HttpResponse
 from datetime import datetime
 from events.models import Event
-from django.contrib.auth.decorators import login_required
-
 # Create your views here.
-@login_required
 def event(request):
     events = Event.objects.all()
     context = {'events':events}
