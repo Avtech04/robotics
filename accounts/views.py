@@ -6,16 +6,23 @@ from .models import *
 import uuid
 from django.conf import settings
 from django.core.mail import send_mail
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from events.models import Event
 # Create your views here.
+from noticeBoard.models import AdminNotice
 
 @login_required
 def home(request):
-    events = Event.objects.all()
-    context = {'events': events}
-    return render(request , 'dashboard.html',context)
+
+    # events = Event.objects.all()
+    # context = {'events': events}
+    # return render(request , 'dashboard.html',context)
+
+    content = AdminNotice.objects.all().order_by ('id') [1:4]
+    size = AdminNotice.objects.all().count()
+    return render(request , 'dashboard.html',{'conts': content, 'num': size})
+
 
 
 
@@ -108,6 +115,11 @@ def verify(request , auth_token):
 
 def error_page(request):
     return  render(request , 'error.html')
+
+def logout_attempt(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('login_attempt')
 
 
 

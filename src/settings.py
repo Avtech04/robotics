@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages
+from dotenv import load_dotenv
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'events.apps.EventsConfig',
+    'noticeBoard.apps.NoticeboardConfig',
 ]
 
 MIDDLEWARE = [
@@ -55,12 +59,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'src.urls'
 
-TEMPLATES = [
+TEMPLATES = [ 
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [  os.path.join(BASE_DIR, "accounts/templates"),
-    os.path.join(BASE_DIR, "events/templates/events"),
-    BASE_DIR,
+                    os.path.join(BASE_DIR, "events/templates/events"),
+                    os.path.join(BASE_DIR, "events/templates/events"),
+                    os.path.join(BASE_DIR, "noticeBoard/templates/noticeBoard"),
+                    BASE_DIR,
+
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -132,6 +139,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+
+load_dotenv()
+EMAIL_HOST_USER = os.getenv("SECRET_KEY")
+EMAIL_HOST_PASSWORD = os.getenv("SECRET_PASSWORD")
 

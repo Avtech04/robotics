@@ -195,7 +195,7 @@
           
 <!-- 3. Notice-board-->
 <li class="nav-item has-treeview menu-open">
-  <a href="/" class="nav-link ">
+  <a href="/noticeboard/adminNotice" class="nav-link ">
     <i class="nav-icon fas fa-calendar"></i>
     <p>
       Notice-Board
@@ -203,70 +203,18 @@
     </p>
   </a>
   <ul class="nav nav-treeview">
+    {% if user.is_authenticated and user.is_staff %}
     <li class="nav-item">
-      <a href="/" class="nav-link">
+      <a href="/noticeboard/addNotice" class="nav-link">
         <i class="far fa fa-edit nav-icon"></i>
-        <p>Create Event</p>
+        <p>Add New Notice</p>
       </a>
     </li>
+    {% endif %}
     <li class="nav-item">
-      <a href="/events" class="nav-link">
+      <a href="/noticeboard/adminNotice" class="nav-link">
         <i class="far fa fa-list nav-icon"></i>
-        <p>Event List</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/" class="nav-link">
-        <i class="far fa fa-edit nav-icon"></i>
-        <p>Add Event Member</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/" class="nav-link">
-        <i class="far fa fa-list nav-icon"></i>
-        <p>Join Event List</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/" class="nav-link">
-        <i class="far fa fa-list nav-icon"></i>
-        <p>Event Wish List</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/" class="nav-link">
-        <i class="far fa fa-edit nav-icon"></i>
-        <p>Add Event Wish User</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/" class="nav-link">
-        <i class="far fa fa-list nav-icon"></i>
-        <p>Complete Event List</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/" class="nav-link">
-        <i class="far fa fa-list nav-icon"></i>
-        <p>Absense User</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/" class="nav-link">
-        <i class="far fa fa-list nav-icon"></i>
-        <p>Complete Event User</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/" class="nav-link">
-        <i class="far fa fa-edit nav-icon"></i>
-        <p>Create User Mark</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/" class="nav-link">
-        <i class="far fa fa-list nav-icon"></i>
-        <p>User Mark List</p>
+        <p>Notice List</p>
       </a>
     </li>
   </ul>
