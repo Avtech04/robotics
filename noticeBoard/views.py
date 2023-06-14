@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from datetime import datetime
+from django.contrib.auth.models import User
 from noticeBoard.models import AdminNotice
 from django.contrib import messages
 from .forms import noticeaddition
@@ -8,8 +9,9 @@ from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
 
+# Create your views here.
+@login_required
 def broadcast(request, id):
     if request.method == "POST":
         pi = AdminNotice.objects.get(pk=id)
@@ -17,13 +19,14 @@ def broadcast(request, id):
         message = pi.notice
         
         from_email = 'kk235964@gmail.com'
-        recipient_list = ['kamal.20213003@mnnit.ac.in']
-        
+        recipient_list = User.objects.values_list('email',flat=True)
+       
         for recipient in recipient_list:
             send_mail(subject, message, from_email, [recipient], fail_silently=False)
         messages.success(request, 'Notice has been Sent to all registered users mail!')
     return HttpResponseRedirect(reverse('adminNotice'))
     
+@login_required
 def addNotice(request):
     if request.method == "POST":
         notice = noticeaddition(request.POST)
@@ -36,10 +39,12 @@ def addNotice(request):
         notice = noticeaddition()
     return render(request, 'addnotice.html', {'form' : notice})
 
+@login_required
 def adminNotice(request):
     content = AdminNotice.objects.all()
     return render(request, 'adminNotice.html', {'conts': content})
 
+@login_required
 def update_data(request, id):
     if request.method == "POST":
         pi = AdminNotice.objects.get(pk=id)
@@ -52,6 +57,7 @@ def update_data(request, id):
         notice = noticeaddition(instance=pi)
     return render(request,'updateform.html', { 'form':notice})
 
+@login_required
 def delete_data(request,id):
     if request.method == "POST":
         pi = AdminNotice.objects.get(pk=id)

@@ -9,10 +9,13 @@ from django.core.mail import send_mail
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+from noticeBoard.models import AdminNotice
 
 @login_required
 def home(request):
-    return render(request , 'dashboard.html')
+    content = AdminNotice.objects.all().order_by ('id') [1:4]
+    size = AdminNotice.objects.all().count()
+    return render(request , 'dashboard.html',{'conts': content, 'num': size})
 
 
 
