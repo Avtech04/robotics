@@ -15,13 +15,13 @@ from noticeBoard.models import AdminNotice
 @login_required
 def home(request):
 
-    # events = Event.objects.all()
-    # context = {'events': events}
+    events = Event.objects.all()
+    context = {'events': events}
     # return render(request , 'dashboard.html',context)
 
     content = AdminNotice.objects.all().order_by ('id') [1:4]
     size = AdminNotice.objects.all().count()
-    return render(request , 'dashboard.html',{'conts': content, 'num': size})
+    return render(request , 'dashboard.html',{'conts': content, 'num': size,**context})
 
 
 
