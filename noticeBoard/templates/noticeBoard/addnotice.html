@@ -2,6 +2,7 @@
 {% block title %}Add Notice{% endblock  %}
 
 {% block content %}
+{% if user.is_authenticated and user.is_staff %}
 <form method="POST" action="">
     {% csrf_token %}
     <div class="form-group">
@@ -11,5 +12,5 @@
     <a href="{% url 'adminNotice' %}" class='btn btn-primary'>Back to Notice Board</a>
     </div>
 </form>
-
+{% endif %}
 {% endblock  %}

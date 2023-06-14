@@ -5,9 +5,11 @@ from django.contrib import messages
 from .forms import noticeaddition
 from django.urls import reverse
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+
 def broadcast(request, id):
     if request.method == "POST":
         pi = AdminNotice.objects.get(pk=id)

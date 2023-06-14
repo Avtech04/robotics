@@ -203,12 +203,14 @@
     </p>
   </a>
   <ul class="nav nav-treeview">
+    {% if user.is_authenticated and user.is_staff %}
     <li class="nav-item">
       <a href="/noticeboard/addNotice" class="nav-link">
         <i class="far fa fa-edit nav-icon"></i>
         <p>Add New Notice</p>
       </a>
     </li>
+    {% endif %}
     <li class="nav-item">
       <a href="/noticeboard/adminNotice" class="nav-link">
         <i class="far fa fa-list nav-icon"></i>
