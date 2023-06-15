@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your events</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+{% extends 'home.html' %}
+
+{% block title %}Your events{% endblock title %}
+{% block extrahead %}
+
+{% comment %} <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round"> {% endcomment %}
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> {% endcomment %}
+{% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> {% endcomment %}
+{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> {% endcomment %}
+{% comment %} <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  {% endcomment %}
 
 <style>
  body {
@@ -234,8 +232,10 @@
 	}
 
 </style>
-  
-  <body>
+{% endblock extrahead %}
+{% block content %}
+
+
     
     <div class="container">
         <div class="table-wrapper">
@@ -406,8 +406,10 @@
 	</div>
     {% endfor %}
 	
-</body>
-<script>
+	{% endblock content %}
+
+	{% block extrascript %}
+
 
 $(document).ready(function(){
 	// Activate tooltip
@@ -433,5 +435,5 @@ $(document).ready(function(){
 	});
 });
 
-</script>
+{% endblock extrascript %}
 </html>
