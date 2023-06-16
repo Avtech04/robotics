@@ -1,0 +1,37 @@
+ {% extends 'home.html' %}
+ {% block title %}User Detail{% endblock title %}
+
+ {%block content%}
+
+
+  <table class="table mx-3">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email Address</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        {% if user.is_staff == 0%}
+      <tr>
+        <th scope="row">{{forloop.counter|add:-1}}</th>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td><a href=" {% url 'usersDetail' %} " class="btn btn-info text-sm" >Modify</a>
+        <a href=" {% url 'delete_user' %} " class="btn btn-danger text-sm" >Delete</a></td>
+      </tr>
+      {%endif%}
+      {% endfor%}
+     
+      
+      
+    </tbody>
+</table>
+
+<div class='container text-center'>
+<a href=" {% url 'downloadUser' %} " class="btn btn-success   text-sm" >Download User list</a>
+</div>
+ {% endblock content %}

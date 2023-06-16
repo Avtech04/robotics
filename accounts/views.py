@@ -1,4 +1,6 @@
 from accounts.models import Profile
+import csv
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -9,6 +11,7 @@ from django.core.mail import send_mail
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from events.models import Event
+from articles.models import Article
 # Create your views here.
 from noticeBoard.models import AdminNotice
 
@@ -18,11 +21,41 @@ def home(request):
     events = Event.objects.all()
     context = {'events': events}
     # return render(request , 'dashboard.html',context)
-
+    quant = User.objects.all().count()
     content = AdminNotice.objects.all().order_by ('id') [1:4]
     size = AdminNotice.objects.all().count()
-    return render(request , 'dashboard.html',{'conts': content, 'num': size,**context})
+    art = Article.objects.all().count()
+    return render(request , 'dashboard.html',{'conts': content, 'num': size,**context, 'list': quant , 'article_count': art})
 
+
+def user_list(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="user_list.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Username', 'Email'])
+
+    users = User.objects.all()
+    for user in users:
+        if user.is_staff == 0:
+            writer.writerow([user.username, user.email])
+    
+    return response
+    
+def usersDetail(request):
+    users = User.objects.all()
+    return render(request, 'usersDetail.html',{'users': users})
+
+def delete_user(request,username):
+    try:
+        user = User.objects.get(username=username)
+        user.delete()
+        messages.success(request, "User is deleted Successfully!")
+    except User.DoesNotExist:
+        print("User does not exist.")
+
+# def modify_user(request):
+#     return render(request, 'user-mod')
 
 
 

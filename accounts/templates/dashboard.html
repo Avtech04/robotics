@@ -32,8 +32,8 @@
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          {% if event %}
-            <h3>{{ event }}</h3>
+          {% if article_count %}
+            <h3>{{ article_count }}</h3>
           {% else %}
             <h3>0</h3>
           {% endif %}
@@ -51,10 +51,34 @@
     <!-- ./col -->
     <div class="col-lg-3 col-6">
       <!-- small box -->
+      <div class="small-box bg-secondary">
+        <div class="inner">
+          {% if list %}
+            <h3>{{ list }}</h3>
+            {% else %}
+            <h3>0</h3>
+          {% endif %}
+         
+
+          <p>User Analysis</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="{% url 'usersDetail' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+
+    {% comment %} This Content is organized by Kamal Ahmad {% endcomment %}
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-        
+              {% if num %}
             <h3>{{ num }}</h3>
+            {% else %}
+            <h3>0</h3>
+          {% endif %}
          
 
           <p>Notice-Board</p>
@@ -66,6 +90,8 @@
       </div>
     </div>
     <!-- ./col -->
+
+
   </div>
   <div class="mt-5">
     {%if conts %}

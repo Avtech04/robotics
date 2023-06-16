@@ -10,6 +10,10 @@ urlpatterns = [
     path('success' , success , name='success'),
     path('verify/<auth_token>' , verify , name="verify"),
     path('error' , error_page , name="error"),
+    path('downloadUser' , user_list , name="downloadUser"),
     path('accounts/logout/' , logout_attempt , name="logout_attempt"),
+    path('accounts/usersDetail' , usersDetail , name="usersDetail"),
+    path('accounts/delete' , delete_user , name="delete_user"),
+    # path('accounts/modify' , modify_user , name="modify_user"),                                                                                                                                                                                 
 
 ]
