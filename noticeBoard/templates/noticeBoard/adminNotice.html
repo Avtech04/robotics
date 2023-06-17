@@ -6,6 +6,8 @@
 <style>
   .container {
     transition: transform 0.3s;
+    background-color: #f8f9fa;
+    /* Highlighted: Added background color for solid container */
   }
 
   .container:hover {
@@ -24,14 +26,6 @@
 
   .rounded {
     border-radius: 8px;
-  }
-
-  .border-success {
-    border-color: #28a745 !important;
-  }
-
-  .border-grey {
-    border-color: #808080 !important;
   }
 
   .text-warning {
@@ -98,7 +92,7 @@
 <div class="mt-5">
   {% if conts %}
   {% for cont in conts reversed %}
-  <div class="container rounded mt-2 border border-radius-rounded border-success">
+  <div class="container rounded mt-2">
     <div class="col-md-15 p-3">
       <div class='d-flex justify-content-between'>
         <div class="text-warning pb-3">
@@ -118,7 +112,7 @@
         </div>
         {% endif %}
       </div>
-      <div class="border border-grey p-3">
+      <div class="bg-light p-3">
         {{ cont.notice }}
       </div>
     </div>
@@ -130,4 +124,3 @@
   {% endif %}
 </div>
 {% endblock %}
-

@@ -86,4 +86,23 @@
   </div>
   {% endfor %}
 </div>
+
+
+<div class="pagination justify-content-center mt-4">
+  {% if articles.has_previous %}
+  <a href="?page={{ articles.previous_page_number }}" class="page-link">&laquo; Previous</a>
+  {% endif %}
+  {% for i in articles.paginator.page_range %}
+  {% if articles.number == i %}
+  <a href="?page={{ i }}" class="page-link active">{{ i }}</a>
+  {% else %}
+  <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+  {% endif %}
+  {% endfor %}
+  {% if articles.has_next %}
+  <a href="?page={{ articles.next_page_number }}" class="page-link">Next &raquo;</a>
+  {% endif %}
+</div>
+
+
 {% endblock content-article %}
