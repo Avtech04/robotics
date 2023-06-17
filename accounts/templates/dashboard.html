@@ -1,0 +1,175 @@
+{% extends 'home.html' %}
+{% block title %}Dashboard{% endblock title %}
+{% block breadcrumb %}Dashboard{% endblock breadcrumb %}
+{% block header-title %}Dashboard{% endblock header-title %}
+{% block styles %} 
+<style>
+.card-header{
+  background: linear-gradient(to right, #33ccff 0%, #ff99cc 100%);
+}
+a{
+  color: #000;;
+}
+.card-body{
+  background: linear-gradient(to bottom right, #0066ff 0%, #ffffff 100%);
+}
+.card-footer{
+  background: linear-gradient(to right, #ffffcc 0%, #ffffcc 100%);
+}
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+
+
+      <div class="small-box bg-info">
+        <div class="inner">
+          {% if event_ctg %}
+            <h3>{{ event_ctg }}</h3>
+          {% else %}
+            <h3>{{ events.count }}</h3>
+          {% endif %}
+
+          <p>Active Events</p>
+        </div>
+      
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        <a href="/events" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-success">
+        <div class="inner">
+        
+            <h3>{{ articles.count }}</h3>
+         
+
+          <p>Articles</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="/articles" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-danger">
+        <div class="inner">
+        
+            <h3>{{ num }}</h3>
+         
+
+          <p>Notice-Board</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="{% url 'adminNotice' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+  </div>
+  <div class="mt-5">
+    {%if conts %}
+    
+    {% for cont in conts reversed %}
+
+    <div class="container blinking-text bg-gradient-secondary rounded mt-2 border border-radius-rounded border-success" > 
+      {% comment %} <div class="row justify-content-md-left"> {% endcomment %}
+      
+       <div class="col-md-15 p-3">
+        <div class='d-flex  justify-content-between'>
+          <div class="text-warning  pb-3">
+            {{ cont.date }}
+          </div>
+        </div >
+        <span class="blinking-bullet"> </span>
+        {{ cont.notice }}
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <!-- Event List -->
+{% comment %} event added to dashboard {% endcomment %}
+<div class="container text-center">
+  <div>
+      <h1 class="text-center">Latest Events</h1>
+      {% for event in events %}
+      {% if forloop.counter <= 3 %}
+
+      <div class="card text-center my-2">
+          <div class="card-header">
+            <h4><a href="/events/event/{{event.id}}">{{event.event_name}}</a></h4>
+              
+          </div>
+          <div class="card-body">
+            Organizer : {{event.event_createdby}}
+            <p class="card-text">Description : {{event.event_description | slice:50}}...</p>
+            
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Register now</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Register-Here</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form method="post" action="{% url 'register_participant' %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="recipient-name" class="col-form-label">Enter your good name here</label>
+      <input type="text" class="form-control" id="recipient-name" name="recipient-name"  value="{{ request.user.username }}" readonly>
+    </div>
+    <div class="form-group">
+      <label for="recipient-email" class="col-form-label">Enter your email id here</label>
+      <input type="email" class="form-control" id="recipient-email" name="recipient-email"  value="{{ request.user.email }}" readonly>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+            <a class='mx-4' href="/events/event/{{event.id}}">read more</a>
+          </div>
+          <div class="card-footer text-muted">
+              last updated : {{event.time_of_creation}}
+          </div>
+        </div>
+        {% endif %}
+          {% endfor %}
+
+  </div>
+</div>
+
+
+{% comment %} event code end {% endcomment %}
+
+
+ 
+{% endblock content %}

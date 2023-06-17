@@ -1,0 +1,128 @@
+{% extends 'home.html' %}
+
+{% block title %}Notice{% endblock %}
+
+{% block styles %}
+<style>
+  .container {
+    transition: transform 0.3s;
+    background-color: #f8f9fa;
+    /* Highlighted: Added background color for solid container */
+    border: 1px solid #ced4da; /* Added border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow */
+  }
+
+  .container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increased box shadow */
+  }
+
+  .text-danger {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 2px solid #007bff;
+    margin-bottom: 20px;
+  }
+
+  .rounded {
+    border-radius: 8px;
+  }
+
+  .text-warning {
+    font-weight: bold;
+    color: #ffc107;
+  }
+
+  .pb-3 {
+    padding-bottom: 0.75rem;
+  }
+
+  .btn-sm {
+    font-size: 14px;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+
+  .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+  }
+
+  .btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+
+  .alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+  }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="container mt-5 border-bottom border-secondary">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto text-danger">
+      NOTICE BOARD
+    </div>
+  </div>
+</div>
+
+<div class="mt-5">
+  {% if conts %}
+  {% for cont in conts reversed %}
+  <div class="container rounded mt-2">
+    <div class="col-md-15 p-3">
+      <div class='d-flex justify-content-between'>
+        <div class="text-warning pb-3">
+          {{ cont.date }}
+        </div>
+        {% if user.is_authenticated and user.is_staff %}
+        <div class="text-warning pb-3">
+          <form action='{% url 'broadcastdata' cont.id %}' method="POST" class='d-inline'>
+            {% csrf_token %}
+            <input type="submit" class='btn btn-success btn-sm' value='Broadcast'>
+          </form>
+          <a href="{% url 'updatedata' cont.id %}" class="btn btn-warning btn-sm">Update</a>
+          <form action='{% url 'deletedata' cont.id %}' method="POST" class='d-inline'>
+            {% csrf_token %}
+            <input type="submit" class='btn btn-danger btn-sm' value='Delete'>
+          </form>
+        </div>
+        {% endif %}
+      </div>
+      <div class="bg-light p-3">
+        {{ cont.notice }}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+  {% else %}
+  <div class="container text-center alert alert-warning"> No Notice Available </div>
+  {% endif %}
+</div>
+{% endblock %}

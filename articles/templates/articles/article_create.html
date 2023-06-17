@@ -1,0 +1,58 @@
+{% extends 'base_layout.html' %} 
+
+{% block styles-article-create %}
+<style>
+  .create-article {
+    transition: transform 0.3s;
+  }
+
+  .create-article:hover {
+    transform: translateY(-5px);
+  }
+
+  .create-article form {
+    transition: transform 0.3s;
+  }
+
+  .create-article form:hover {
+    transform: scale(1.02);
+  }
+
+  .create-article form input[type="submit"] {
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  .create-article form input[type="submit"]:hover {
+    background-color: #343a40;
+    transform: scale(1.05);
+  }
+</style>
+{% endblock styles-article-create %}
+
+{% block content-article %}
+<div class="container create-article">
+  <h2 class="text-secondary h2 text-center"><i class="fa-solid fa-pen-to-square" style="color: #6b717b;"></i> Add Blog</h2>
+  <div class="container p-4 mt-4 rounded shadow-lg">
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'success' %}
+          <div class="alert alert-success">{{ message }}</div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    
+    <form action="{% url 'articles:create' %}" class="site-form" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}" class="text-dark">{{ field.label }}</label>
+          {{ field }}
+        </div>
+      {% endfor %}
+
+      <input class="btn btn-dark btn-lg btn-block my-4 transition-rotate" type="submit" value="Create" />
+    </form>
+  </div>
+  <script src="/static/slugify.js"></script>
+</div>
+{% endblock content-article %}

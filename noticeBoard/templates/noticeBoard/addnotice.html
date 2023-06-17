@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+
+{% block title %}Add Notice{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_staff %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form method="POST" action="" class="animate__animated animate__fadeInUp">
+        {% csrf_token %}
+        <div class="card">
+          <h5 class="card-header text-center bg-primary text-white">Add New Notice</h5>
+          <div class="card-body d-flex justify-content-center">
+            {{ form.as_p }}
+          </div>
+          <div class="card-footer text-center">
+            <button type="submit" class="btn btn-success btn-hover-effect animate__animated animate__fadeInLeft">Submit</button>
+            <a href="{% url 'adminNotice' %}" class="btn btn-primary btn-hover-effect animate__animated animate__fadeInRight">Back to Notice Board</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+

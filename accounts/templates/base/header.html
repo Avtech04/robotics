@@ -1,0 +1,55 @@
+{% load static %}
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+<!-- Theme style -->
+<link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
+
+<!-- Google Font: Source Sans Pro -->
+<!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
+
+<!-- Adding Custom Font -->
+<style>
+    @font-face { font-family: JuneBug; src: url({% static 'fonts/Minion-Regular.ttf' %}); } 
+    h1, h2, p, a, b {
+       font-family: Minion-Regular
+    }
+    @keyframes color-change {
+        0% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      
+      .blinking-bullet {
+        display: inline-block;
+        position: relative;
+        margin-right: 5px;
+      }
+      
+      .blinking-bullet::before {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: red;
+        margin-right: 5px;
+        animation: color-change 1s infinite;
+      }
+      
+      .blinking-bullet::after {
+        content: "NEW";
+        display: inline-block;
+        position: absolute;
+        top: -1px;
+        left: -10px;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 2px 4px;
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+      }
+</style>

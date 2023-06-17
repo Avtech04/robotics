@@ -1,0 +1,35 @@
+{% extends 'home.html' %}
+
+    {% block title %} Robotics event website Article Page {% endblock title %}
+    {% block extrahead %}
+    
+  {% endblock extrahead %}
+
+  {% block header-title %}Article{% endblock header-title %}
+  {% block breadcrumb %} articles {% endblock breadcrumb %}
+
+  {% block content %}
+
+    <header class="wrapper">
+      {% comment %} <h1>
+        <a href="{% url 'home' %}"
+        ><img src="" alt="Robotics Event Article Page"
+        /></a>
+      </h1> {% endcomment %}
+      <nav>
+        <ul>
+          {% if user.is_authenticated %}
+          
+          <li>
+            <a href="{% url 'articles:create' %}" class="highlight text-secondary h4" style="position: absolute; top: 0; right: 0;"><i class="fa-solid fa-arrow-right" style="color: #5d6778;"></i>  Create Article </a>
+            {% comment %} <a href="{% url 'articles:create' %}" style=" " class="highlight"
+              >New Article</a
+            > {% endcomment %}
+          </li>
+          {% endif%}
+        </ul>
+      </nav>
+    </header>
+    <div class="wrapper">{% block content-article %} {% endblock content-article %}</div>
+  
+    {% endblock content %}

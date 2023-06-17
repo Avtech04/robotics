@@ -1,0 +1,131 @@
+{% load static %}
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="#" class="brand-link">
+    <span class="brand-text font-weight-light">Admin Panel</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img
+          src="{% static 'img/avatar04.png' %}"
+          class="img-circle elevation-2"
+          alt="User Image"
+        />
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">{{request.user.username}}</a>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul
+        class="nav nav-pills nav-sidebar flex-column"
+        data-widget="treeview"
+        role="menu"
+        data-accordion="false"
+      >
+        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+        <li class="nav-item">
+          <a href="/" class="nav-link active">
+            <i class="nav-icon fas fa-th"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+
+        <!-- 1. Events-->
+        <li class="nav-item has-treeview menu-open">
+          <a href="/events" class="nav-link">
+            <i class="nav-icon fas fa-calendar"></i>
+            <p>
+              Events
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            {% if user.is_authenticated and user.is_staff %}
+            <li class="nav-item">
+                <a href="/events/create_event" class="nav-link">
+                    <i class="far fa fa-edit nav-icon"></i>
+                    <p>Create Event</p>
+                </a>
+            </li>
+        {% endif %}
+            <li class="nav-item">
+              <a href="/events" class="nav-link">
+                <i class="far fa fa-list nav-icon"></i>
+                <p>Event List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/events/registered_events" class="nav-link">
+                <i class="far fa fa-edit nav-icon"></i>
+                <p>Enrolled events</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- 2. Articles-->
+        <li class="nav-item has-treeview menu-open">
+          <a href="" class="nav-link">
+            <i class="nav-icon fas fa-calendar"></i>
+            <p>
+              Articles
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/articles/create" class="nav-link">
+                <i class="far fa fa-edit nav-icon"></i>
+                <p>Publish Article</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/articles" class="nav-link">
+                <i class="far fa fa-list nav-icon"></i>
+                <p>Article List</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- 3. Notice-board-->
+        <li class="nav-item has-treeview menu-open">
+          <a href="/noticeboard/adminNotice" class="nav-link">
+            <i class="nav-icon fas fa-calendar"></i>
+            <p>
+              Notice-Board
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            {% if user.is_authenticated and user.is_staff %}
+            <li class="nav-item">
+              <a href="/noticeboard/addNotice" class="nav-link">
+                <i class="far fa fa-edit nav-icon"></i>
+                <p>Add New Notice</p>
+              </a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a href="/noticeboard/adminNotice" class="nav-link">
+                <i class="far fa fa-list nav-icon"></i>
+                <p>Notice List</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
