@@ -1,4 +1,8 @@
 from accounts.models import Profile
+import csv
+from datetime import datetime
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -8,6 +12,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
+from events.models import Event, feedback
 from events.models import Event
 from articles.models import Article
 # Create your views here.
@@ -20,13 +25,70 @@ def home(request):
     articles= Article.objects.all()
     context = {'events': events , 'articles':articles}
     # return render(request , 'dashboard.html',context)
-
+    quant = User.objects.all().count()
     content = AdminNotice.objects.all().order_by ('id') [1:4]
     size = AdminNotice.objects.all().count()
+
+    art = Article.objects.all().count()
+    return render(request , 'dashboard.html',{'conts': content, 'num': size,**context, 'list': quant , 'article_count': art})
+
+# def contacts(request):
+#     try:
+#         if request.method == "POST":
+#             name = request.POST.get('name')
+#             email = request.POST.get('email')
+#             subject = request.POST.get('subject')
+#             message = request.POST.get('message')
+#             Feedback = feedback(name=name, email=email, subject=subject, message=message, date= datetime.today())
+#             Feedback.save()
+#             messages.success("Your feedback is submitted!")
+#             return render(request, 'thanks.html')
+#         else:
+#             return render(request, 'contacts.html')
+#     except Exception as e:
+#         return HttpResponse(f"An error occurred: {e}")
+
+def user_list(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="user_list.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Username', 'Email'])
+
+    users = User.objects.all()
+    for user in users:
+        if user.is_staff == 0:
+            writer.writerow([user.username, user.email])
+    return response
     
-    return render(request , 'dashboard.html',{'conts': content, 'num': size,**context})
+def usersDetail(request):
+    users = User.objects.all()
+    return render(request, 'usersDetail.html',{'users': users})
+
+def delete_user(request,username):
+    try:
+        user = User.objects.get(username=username)
+        user.delete()
+        messages.success(request, "User is deleted Successfully!")
+    except User.DoesNotExist:
+        print("User does not exist.")
+    return HttpResponseRedirect(reverse('usersDetail'))
 
 
+
+def modify_user(request, username):
+    if request.method == 'POST':
+        
+        new_details = {
+            'email': request.POST.get('email'),
+        } 
+        user = User.objects.get(username=username)
+        user.email = new_details['email']
+        user.save()
+        return HttpResponseRedirect(reverse('usersDetail'))
+    
+def contacts(request):
+    return render(request, 'contacts.html')
 
 
 def login_attempt(request):
@@ -79,7 +141,7 @@ def register_attempt(request):
             auth_token = str(uuid.uuid4())
             profile_obj = Profile.objects.create(user = user_obj , auth_token = auth_token)
             profile_obj.save()
-            send_mail_after_registration(email , auth_token)
+            send_mail_after_registration(email , auth_token)        
             return redirect('/token')
 
         except Exception as e:
