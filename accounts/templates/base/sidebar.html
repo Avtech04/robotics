@@ -41,8 +41,25 @@
 
         <!-- 1. Events-->
         <li class="nav-item has-treeview menu-open">
+          <a href="" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              User Detail
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'usersDetail' %}" class="nav-link">
+                <i class="far fa fa-list nav-icon"></i>
+                <p>Registered User</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview menu-open">
           <a href="/events" class="nav-link">
-            <i class="nav-icon fas fa-calendar"></i>
+            <i class="nav-icon fas fa-handshake"></i>
             <p>
               Events
               <i class="right fas fa-angle-left"></i>
@@ -73,7 +90,7 @@
         <!-- 2. Articles-->
         <li class="nav-item has-treeview menu-open">
           <a href="" class="nav-link">
-            <i class="nav-icon fas fa-calendar"></i>
+            <i class="nav-icon fas fa-pencil-alt"></i>
             <p>
               Articles
               <i class="right fas fa-angle-left"></i>

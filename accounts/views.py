@@ -1,6 +1,8 @@
 from accounts.models import Profile
 import csv
-from django.http import HttpResponse
+from datetime import datetime
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -53,9 +55,28 @@ def delete_user(request,username):
         messages.success(request, "User is deleted Successfully!")
     except User.DoesNotExist:
         print("User does not exist.")
+    return HttpResponseRedirect(reverse('usersDetail'))
 
-# def modify_user(request):
-#     return render(request, 'user-mod')
+
+def modify_user(request, username):
+    if request.method == 'POST':
+        # Retrieve the username and new details from the request POST data
+        # username = request.POST.get('username')
+        new_details = {
+            'email': request.POST.get('email'),
+            # 'first_name': request.POST.get('first_name'),
+            # 'last_name': request.POST.get('last_name')
+        }
+        # Retrieve the user object
+        user = User.objects.get(username=username)
+            # Modify the desired user details
+        user.email = new_details['email']
+        # user.first_name = new_details['first_name']
+        # user.last_name = new_details['last_name']
+        #     # Save the changes
+        user.save()
+        return HttpResponseRedirect(reverse('usersDetail'))
+    
 
 
 
@@ -72,9 +93,9 @@ def login_attempt(request):
         
         profile_obj = Profile.objects.filter(user = user_obj ).first()
 
-        if not profile_obj.is_verified:
-            messages.success(request, 'Profile is not verified check your mail.')
-            return redirect('/accounts/login')
+        # if not profile_obj.is_verified:
+        #     messages.success(request, 'Profile is not verified check your mail.')
+        #     return redirect('/accounts/login')
 
         user = authenticate(username = username , password = password)
         if user is None:
@@ -132,16 +153,16 @@ def verify(request , auth_token):
         profile_obj = Profile.objects.filter(auth_token = auth_token).first()
     
 
-        if profile_obj:
-            if profile_obj.is_verified:
-                messages.success(request, 'Your account is already verified.')
-                return redirect('/accounts/login')
-            profile_obj.is_verified = True
-            profile_obj.save()
-            messages.success(request, 'Your account has been verified.')
-            return redirect('/accounts/login')
-        else:
-            return redirect('/error')
+        # if profile_obj:
+        #     if profile_obj.is_verified:
+        #         messages.success(request, 'Your account is already verified.')
+        #         return redirect('/accounts/login')
+        #     profile_obj.is_verified = True
+        #     profile_obj.save()
+        #     messages.success(request, 'Your account has been verified.')
+        #     return redirect('/accounts/login')
+        # else:
+        #     return redirect('/error')
     except Exception as e:
         print(e)
         return redirect('/')

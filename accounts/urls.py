@@ -13,7 +13,7 @@ urlpatterns = [
     path('downloadUser' , user_list , name="downloadUser"),
     path('accounts/logout/' , logout_attempt , name="logout_attempt"),
     path('accounts/usersDetail' , usersDetail , name="usersDetail"),
-    path('accounts/delete' , delete_user , name="delete_user"),
-    # path('accounts/modify' , modify_user , name="modify_user"),                                                                                                                                                                                 
+    path('accounts/delete/<str:username>/' , delete_user , name="delete_user"),
+    path('accounts/modify/<str:username>/' , modify_user , name="modify_user"),                                                                                                                                                                                 
 
 ]
