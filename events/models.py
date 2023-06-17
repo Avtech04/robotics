@@ -15,6 +15,13 @@ class Participant(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
 
+class feedback(models.Model):
+    name = models.CharField(max_length=20)
+    email = models.EmailField()
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
+    date = models.DateField()
+
     def __str__(self):
         return self.name
     
