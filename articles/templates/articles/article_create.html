@@ -33,6 +33,14 @@
 <div class="container create-article">
   <h2 class="text-secondary h2 text-center"><i class="fa-solid fa-pen-to-square" style="color: #6b717b;"></i> Add Blog</h2>
   <div class="container p-4 mt-4 rounded shadow-lg">
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'success' %}
+          <div class="alert alert-success">{{ message }}</div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    
     <form action="{% url 'articles:create' %}" class="site-form" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in form %}
