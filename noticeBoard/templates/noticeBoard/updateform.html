@@ -1,16 +1,34 @@
 {% extends 'home.html' %}
-{% block title %}Update form{% endblock  %}
+
+{% block title %}Update Form{% endblock %}
+
+{% block styles-update-notice %}
+<style>
+  .form-group {
+    transition: transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+  }
+
+  .form-group:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+</style>
+{% endblock styles-update-notice %}
 
 {% block content %}
 {% if user.is_authenticated and user.is_staff %}
-    <form method="POST" action="">
-        {% csrf_token %}
-        <div class="form-group">
-            <label class='mt-5 ml-4 border-bottom' for="notice">[/]Update Notice</label>
-            {{form.as_p}}
-        <button action="POST" id="submit" type= "submit" class="btn btn-success ml-4">Submit</button>
-        <a href="{% url 'adminNotice' %}" class='btn btn-primary'>Back to Notice Board</a>
-        </div>
-    </form>
+  <form method="POST" action="">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="mt-5 ml-4 border-bottom update-notice-heading" for="notice">Update Notice</label>
+      {{ form.as_p }}
+      <button action="POST" id="submit" type="submit" class="btn btn-success ml-4">Submit</button>
+      <a href="{% url 'adminNotice' %}" class="btn btn-primary">Back to Notice Board</a>
+    </div>
+  </form>
 {% endif %}
-{% endblock  %}
+{% endblock %}
