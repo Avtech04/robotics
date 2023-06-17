@@ -31,22 +31,6 @@
 
 {% block content-article %}
 <div class="container p-5 m-4">
-  <div class="create-article">
-    <h2 class="text-secondary h2" style="margin-bottom: 20px;"><i class="fa-solid fa-pen-to-square" style="color: #6b717b;"></i>Add Blog</h2>
-    <div class="form-group">
-      <form action="{% url 'articles:create' %}" class="site-form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% for field in form %}
-          <div class="form-field" style="margin-bottom: 10px;">
-            <label for="{{ field.id_for_label }}" class="text-dark">{{ field.label }}</label>
-            {{ field }}
-          </div>
-        {% endfor %}
-
-        <input class="btn btn-secondary" type="submit" value="Create" />
-      </form>
-    </div>
-    <script src="/static/slugify.js"></script>
 
 <div class="container create-article">
   <h2 class="text-secondary h2 text-center"><i class="fa-solid fa-pen-to-square" style="color: #6b717b;"></i> Add Blog</h2>

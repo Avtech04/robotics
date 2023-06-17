@@ -12,7 +12,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
-from events.models import Event, feedback
+
 from events.models import Event
 from articles.models import Article
 # Create your views here.
