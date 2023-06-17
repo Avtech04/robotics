@@ -113,15 +113,6 @@ def register_participant(request):
 
 @login_required
 def participant_registered_events(request):
-    try:
-        participant = Participant.objects.get(name=request.user.username)
-        registered_events = participant.registered_events.all()
 
-        context = {
-            'registered_events': registered_events
-        }
-
-        return render(request, 'registered_event.html', context)
-    except Participant.DoesNotExist:
-        # Handle the case when the participant does not exist
-        return HttpResponse("no events")
+       return render(request, 'registered_event.html')
+    
