@@ -135,3 +135,6 @@ def send_mail_after_registration(email , token):
     recipient_list = [email]
     send_mail(subject, message , email_from ,recipient_list )
     
+
+def contact(request):
+    return render(request , 'base/contact.html')

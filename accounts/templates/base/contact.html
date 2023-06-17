@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://kit.fontawesome.com/edcd2f95b5.js" crossorigin="anonymous"></script>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: grey;
+    }
+
+    /* Contact Form Styles */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .contact-form:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .contact-form h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    .contact-form .form-control {
+      height: 50px;
+      border-radius: 5px;
+      box-shadow: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .contact-form .form-control:focus {
+      border-color: #4aba70;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    }
+
+    .contact-form textarea.form-control {
+      height: 150px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .contact-form textarea.form-control:focus {
+      border-color: #4aba70;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    }
+
+    .contact-form .submit-btn {
+      background-color: #4aba70;
+      color: #fff;
+      font-weight: 500;
+      border-radius: 5px;
+      padding: 12px 30px;
+      border: none;
+      transition: background-color 0.3s;
+    }
+
+    .contact-form .submit-btn:hover {
+      background-color: #47a166;
+    }
+
+    .contact-form .submit-btn:focus {
+      outline: none;
+    }
+
+    /* Social Icons */
+    .social-icons {
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .contact-form:hover .social-icons {
+      opacity: 1;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      background-color: #4aba70;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      margin-right: 10px;
+      border-radius: 50%;
+      transition: background-color 0.3s;
+    }
+
+    .social-icons a:hover {
+      background-color: #47a166;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="contact-form text-center ">
+          <h2 class='display-4'>Contact Us</h2>
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Your Name">
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Your Email">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
+          </form>
+          <div class="social-icons text-center">
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-instagram"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
