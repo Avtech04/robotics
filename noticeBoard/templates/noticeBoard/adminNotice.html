@@ -8,11 +8,13 @@
     transition: transform 0.3s;
     background-color: #f8f9fa;
     /* Highlighted: Added background color for solid container */
+    border: 1px solid #ced4da; /* Added border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow */
   }
 
   .container:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increased box shadow */
   }
 
   .text-danger {
@@ -81,7 +83,7 @@
 {% endblock styles %}
 
 {% block content %}
-<div class="container mt-5 border-bottom border-primary">
+<div class="container mt-5 border-bottom border-secondary">
   <div class="row justify-content-md-center">
     <div class="col-md-auto text-danger">
       NOTICE BOARD
