@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from events.models import Event, feedback
+from events.models import Event
 from articles.models import Article
 # Create your views here.
 from noticeBoard.models import AdminNotice
@@ -21,29 +22,31 @@ from noticeBoard.models import AdminNotice
 def home(request):
 
     events = Event.objects.all()
-    context = {'events': events}
+    articles= Article.objects.all()
+    context = {'events': events , 'articles':articles}
     # return render(request , 'dashboard.html',context)
     quant = User.objects.all().count()
     content = AdminNotice.objects.all().order_by ('id') [1:4]
     size = AdminNotice.objects.all().count()
+
     art = Article.objects.all().count()
     return render(request , 'dashboard.html',{'conts': content, 'num': size,**context, 'list': quant , 'article_count': art})
 
-def contacts(request):
-    try:
-        if request.method == "POST":
-            name = request.POST.get('name')
-            email = request.POST.get('email')
-            subject = request.POST.get('subject')
-            message = request.POST.get('message')
-            Feedback = feedback(name=name, email=email, subject=subject, message=message, date= datetime.today())
-            Feedback.save()
-            messages.success("Your feedback is submitted!")
-            return render(request, 'thanks.html')
-        else:
-            return render(request, 'contacts.html')
-    except Exception as e:
-        return HttpResponse(f"An error occurred: {e}")
+# def contacts(request):
+#     try:
+#         if request.method == "POST":
+#             name = request.POST.get('name')
+#             email = request.POST.get('email')
+#             subject = request.POST.get('subject')
+#             message = request.POST.get('message')
+#             Feedback = feedback(name=name, email=email, subject=subject, message=message, date= datetime.today())
+#             Feedback.save()
+#             messages.success("Your feedback is submitted!")
+#             return render(request, 'thanks.html')
+#         else:
+#             return render(request, 'contacts.html')
+#     except Exception as e:
+#         return HttpResponse(f"An error occurred: {e}")
 
 def user_list(request):
     response = HttpResponse(content_type='text/csv')
@@ -56,7 +59,6 @@ def user_list(request):
     for user in users:
         if user.is_staff == 0:
             writer.writerow([user.username, user.email])
-    
     return response
     
 def usersDetail(request):
@@ -71,6 +73,7 @@ def delete_user(request,username):
     except User.DoesNotExist:
         print("User does not exist.")
     return HttpResponseRedirect(reverse('usersDetail'))
+
 
 
 def modify_user(request, username):
@@ -197,3 +200,6 @@ def send_mail_after_registration(email , token):
     recipient_list = [email]
     send_mail(subject, message , email_from ,recipient_list )
     
+
+def contact(request):
+    return render(request , 'base/contact.html')

@@ -269,7 +269,7 @@
                     </tr>
                 </thead>
                 <tbody>
-					
+					{%if event in context %}
 					{% for event in context %}
 					
                     <tr>
@@ -290,7 +290,12 @@
                         </td>
                     </tr>
 				
+
                      {% endfor %}
+					 {% else %}
+					 no events registered yet.
+					 
+					 {% endif %}
                 </tbody>
             </table>
 			<div class="clearfix">

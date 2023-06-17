@@ -10,7 +10,8 @@
         <a href="/" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{% url 'contacts' %}" class="nav-link">Contacts</a>
+        {% comment %} <a href="{% url 'contacts' %}" class="nav-link">Contacts</a> {% endcomment %}
+        <a href="{% url 'contact' %}" class="nav-link">Contact</a>
       </li>
     </ul>
 

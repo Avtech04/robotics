@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from .models import Article
 from django.contrib.auth.decorators import login_required
 from .import forms
+from django.contrib import messages
 # Create your views here.
 def article_list(request):
     articles=Article.objects.all().order_by('date')
@@ -26,6 +27,7 @@ def article_create(request):
             instance.author  = request.user
             instance.thumb = form.cleaned_data['thumb']
             instance.save()
+            messages.success(request, 'Article successfully created.')
             return redirect('articles:list')
     else:
         form = forms.CreateArticle()

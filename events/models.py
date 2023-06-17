@@ -14,6 +14,7 @@ class Event(models.Model):
 class Participant(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
+    
 
 class feedback(models.Model):
     name = models.CharField(max_length=20)
