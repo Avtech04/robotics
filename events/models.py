@@ -6,7 +6,7 @@ class Event(models.Model):
     slug = models.CharField(max_length=50)
     time_of_creation = models.DateTimeField('date_published',auto_now_add=True)
     event_createdby=models.CharField(max_length=50,default='')
-    participants = models.ManyToManyField('Participant')
+    participants = models.ManyToManyField('Participant', related_name='registered_events')
 
     def __str__(self):
         return self.event_name

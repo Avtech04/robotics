@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
 from datetime import datetime
 from events.models import Event,Participant
 from django.http import HttpResponse
-
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 
 def event(request):
     try:
@@ -28,6 +30,7 @@ def create_event(request):
     except Exception as e:
         return HttpResponse(f"An error occurred: {e}")
 
+@staff_member_required
 def ADD_event(request):
     try:
         if request.method == 'POST':
@@ -93,18 +96,32 @@ def search_event(request):
         return HttpResponse(f"An error occurred: {e}")
 
 def register_participant(request):
-    if request.method == 'POST':
-        # Get the form data from the POST request
-        name = request.POST.get('recipient-name')
-        email = request.POST.get('recipient-email')
-
-        # Create a new Participant instance
-        participant = Participant(name=name, email=email)
-        participant.save()
-
-        # Return a success response
-        return HttpResponse('Participant registered successfully.')
+    if request.user.is_authenticated:
+        logged_in_user = request.user
+        username = logged_in_user.username
+        email = logged_in_user.email
+        context = {
+            'username': username,
+            'email': email
+        }
+        return render(request,'registered_event.html',context)
 
     else:
         # If the request method is not POST, render the template with the modal
         return render(request, 'events.html')
+    
+
+@login_required
+def participant_registered_events(request):
+    try:
+        participant = Participant.objects.get(name=request.user.username)
+        registered_events = participant.registered_events.all()
+
+        context = {
+            'registered_events': registered_events
+        }
+
+        return render(request, 'registered_event.html', context)
+    except Participant.DoesNotExist:
+        # Handle the case when the participant does not exist
+        return HttpResponse("no events")

@@ -1,16 +1,58 @@
-{% extends 'base_event.html' %}
+{% extends 'home.html' %}
 {% block title %}{{event.event_name |safe}}{% endblock title %}
-{% block body %}
-    <div class = 'container text-center'>
+{% block styles %} 
+<style>
+.card{
 
+}
+</style>
+{% endblock styles %}
+
+{% block header-title %}{{event.event_name |safe}}{% endblock header-title %}
+{% block breadcrumb %} {{event.event_name |safe}}{% endblock breadcrumb %}
+{% block content %}
+    <div class = 'container text-center card my-4'>
         <h2 class="card-title mb-2 cardtext">{{event.event_name}}</h2>
-        <p class="card-text cardtext my-0">Description : {{event.event_description | safe}}</p>
-        <p class="card-text cardtext my-0">Tag : {{event.slug}}</p>
-        <p class="card-text cardtext my-0">Organizer : {{event.event_createdby}}</p>
-        <p class="card-text cardtext my-0">last updated : {{event.time_of_creation}}</p>
+        <p class="card-text cardtext my-0"><b>Description</b> : {{event.event_description | safe}}</p>
+        <p class="card-text cardtext my-0"><b>Tag</b> : {{event.slug}}</p>
+        <p class="card-text cardtext my-0"><b>Organizer</b> : {{event.event_createdby}}</p>
+        <p class="card-text cardtext my-0"><b>last updated</b> : {{event.time_of_creation}}</p>
         <div>
-        <a class="mx-4" href='/events' class="card-text cardlink" target='_blank' rel='noreferrer'>Register Now</a>
-        
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Register now</button>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Register-Here</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post" action="{% url 'register_participant' %}">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Enter your good name here</label>
+                        <input type="text" class="form-control" id="recipient-name" name="recipient-name" value="{{ request.user.username }}" readonly>
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-email" class="col-form-label">Enter your email id here</label>
+                        <input type="email" class="form-control" id="recipient-email" name="recipient-email" value="{{ request.user.email }}" readonly>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+        <div><button type="button" class="btn btn-success my-2" data-whatever="@getbootstrap">download event details</button></div>
+
     
     </div>
-{% endblock body %}
+    </div>
+{% endblock content %}

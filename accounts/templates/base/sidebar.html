@@ -49,12 +49,14 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+            {% if user.is_authenticated and user.is_staff %}
             <li class="nav-item">
-              <a href="/events/create_event" class="nav-link">
-                <i class="far fa fa-edit nav-icon"></i>
-                <p>Create Event</p>
-              </a>
+                <a href="/events/create_event" class="nav-link">
+                    <i class="far fa fa-edit nav-icon"></i>
+                    <p>Create Event</p>
+                </a>
             </li>
+        {% endif %}
             <li class="nav-item">
               <a href="/events" class="nav-link">
                 <i class="far fa fa-list nav-icon"></i>
@@ -62,9 +64,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/" class="nav-link">
+              <a href="/events/registered_events" class="nav-link">
                 <i class="far fa fa-edit nav-icon"></i>
-                <p>Registered events</p>
+                <p>Enrolled events</p>
               </a>
             </li>
           </ul>
