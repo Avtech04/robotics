@@ -5,25 +5,26 @@
     
   {% endblock extrahead %}
 
-  {% block header-title %}Articles{% endblock header-title %}
+  {% block header-title %}Article{% endblock header-title %}
   {% block breadcrumb %} articles {% endblock breadcrumb %}
 
   {% block content %}
 
     <header class="wrapper">
-      <h1>
+      {% comment %} <h1>
         <a href="{% url 'home' %}"
         ><img src="" alt="Robotics Event Article Page"
         /></a>
-      </h1>
+      </h1> {% endcomment %}
       <nav>
         <ul>
           {% if user.is_authenticated %}
           
           <li>
-            <a href="{% url 'articles:create' %}" class="highlight"
+            <a href="{% url 'articles:create' %}" class="highlight text-secondary h4" style="position: absolute; top: 0; right: 0;"><i class="fa-solid fa-arrow-right" style="color: #5d6778;"></i>  Create Article </a>
+            {% comment %} <a href="{% url 'articles:create' %}" style=" " class="highlight"
               >New Article</a
-            >
+            > {% endcomment %}
           </li>
           {% endif%}
         </ul>

@@ -8,10 +8,11 @@
     method="post"
     enctype="multipart/form-data"
   >
-    {% csrf_token %} {{ form }}
+    {% csrf_token %} {{ form.as_p }}
 
     <input type="submit" value="create" />
   </form>
 </div>
 <script src="/static/slugify.js"></script>
-{% endblock content-article %}
+{% endblock content-article %} 
+
