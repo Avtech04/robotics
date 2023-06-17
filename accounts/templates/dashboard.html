@@ -2,6 +2,22 @@
 {% block title %}Dashboard{% endblock title %}
 {% block breadcrumb %}Dashboard{% endblock breadcrumb %}
 {% block header-title %}Dashboard{% endblock header-title %}
+{% block styles %} 
+<style>
+.card-header{
+  background: linear-gradient(to right, #33ccff 0%, #ff99cc 100%);
+}
+a{
+  color: #000;;
+}
+.card-body{
+  background: linear-gradient(to bottom right, #0066ff 0%, #ffffff 100%);
+}
+.card-footer{
+  background: linear-gradient(to right, #ffffcc 0%, #ffffcc 100%);
+}
+</style>
+{% endblock styles %}
 
 {% block content %}
 <div class="row">
@@ -147,11 +163,11 @@
     {% csrf_token %}
     <div class="form-group">
       <label for="recipient-name" class="col-form-label">Enter your good name here</label>
-      <input type="text" class="form-control" id="recipient-name" name="recipient-name">
+      <input type="text" class="form-control" id="recipient-name" name="recipient-name"  value="{{ request.user.username }}" readonly>
     </div>
     <div class="form-group">
       <label for="recipient-email" class="col-form-label">Enter your email id here</label>
-      <input type="email" class="form-control" id="recipient-email" name="recipient-email">
+      <input type="email" class="form-control" id="recipient-email" name="recipient-email"  value="{{ request.user.email }}" readonly>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -1,17 +1,88 @@
-{% extends 'base_layout.html' %} 
+{% extends 'base_layout.html' %}
+
+{% block styles %}
+<style>
+  .card {
+    border: 2px solid #555;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    /* Add additional hover effects here */
+  }
+
+  .card-img-top {
+    object-fit: cover;
+    height: 200px;
+  }
+
+  .card-title a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .card-title a:hover {
+    text-decoration: underline;
+    /* Add additional hover effects here */
+  }
+
+  .card-text {
+    margin-bottom: 10px;
+    color: #666;
+  }
+
+  .card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    padding: 10px 20px;
+  }
+
+  .card-footer p {
+    margin-bottom: 0;
+    color: #888;
+  }
+
+  .article-list-heading {
+    margin-bottom: 40px;
+    /* Add additional styles for the heading icon here */
+  }
+
+  /* Additional Styles */
+  .article-detail {
+    background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+    /* Add background gradient */
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+    /* Add additional styles for the article detail section */
+  }
+
+  /* Add any other additional styles as needed */
+</style>
+{% endblock styles %}
+
 {% block content-article %}
-<h1>Article List</h1>
-<div class="articles">
+<h1 class="h1 text-center text-secondary article-list-heading"><i class="fa-regular fa-newspaper"></i> Article List</h1>
+
+<div class="row">
   {% for article in articles %}
-  <div class="article">
-    <h2>
-      <a href="{% url 'articles:detail' slug=article.slug %}"
-        >{{article.title}}</a
-      >
-    </h2>
-    <p>{{article.snippet}}</p>
-    <p>{{article.date}}</p>
-    <p class="author">added by {{article.author.username}}</p>
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      <img src="{{ article.thumb.url }}" class="card-img-top" alt="Article Image" />
+      <div class="card-body">
+        <h2 class="card-title">
+          <a href="{% url 'articles:detail' slug=article.slug %}">{{ article.title }}</a>
+        </h2>
+        <p class="card-text">{{ article.snippet }}</p>
+      </div>
+      <div class="card-footer">
+        <p class="card-text"><em>Added by {{ article.author.username }}</em></p>
+        <p class="card-text">{{ article.date }}</p>
+      </div>
+    </div>
   </div>
   {% endfor %}
 </div>

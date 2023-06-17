@@ -24,6 +24,7 @@ def article_create(request):
             # save article to db
             instance = form.save(commit=False) # we will do something with the instance and then we will save it.
             instance.author  = request.user
+            instance.thumb = form.cleaned_data['thumb']
             instance.save()
             return redirect('articles:list')
     else:

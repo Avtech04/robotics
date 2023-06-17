@@ -1,11 +1,61 @@
 {% extends 'base_layout.html' %} 
+
+{% block styles-article-detail %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+  .article-detail {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 3px solid #555; 
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .article-detail:hover {
+    transform: scale(1.05);
+  }
+  
+  .article-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .article-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .article-body {
+    font-family: 'Roboto', sans-serif;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+  
+  .article-date {
+    font-family: 'Roboto', sans-serif;
+    color: #777;
+    margin-top: 10px;
+  }
+</style>
+{% endblock styles-article-detail %}
+
 {% block content-article %}
-<div class="article-detail">
-  <div class="article">
-    <img src="{{article.thumb.url}}" />
-    <h2>{{article.title}}</h2>
-    <p>{{article.body}}</p>
-    <p>{{article.date}}</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="article-detail">
+        <img src="{{ article.thumb.url }}" class="article-image" alt="Article Image">
+        <h2 class="article-title">{{ article.title }}</h2>
+        <p class="article-body">{{ article.body }}</p>
+        <p class="article-date">{{ article.date }}</p>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock content-article %}

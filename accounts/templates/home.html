@@ -5,14 +5,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
+  <script src="https://kit.fontawesome.com/edcd2f95b5.js" crossorigin="anonymous"></script>
   <title>{% block title %} {% endblock title %}</title>
+  
   {% include 'base/header.html' %}
   
   {% block extrahead %}
 
   {% endblock extrahead %}
 </head>
+
+{% block styles-article-detail %} {% endblock styles-article-detail %}
+{% block styles %} {% endblock styles %}
+
+{% block styles-notice-admin %}  {% endblock styles-notice-admin %}
+
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
   <!-- Navbar -->
@@ -91,6 +98,7 @@
 {% block extrascript %}
 
 {% endblock extrascript %}
+
 
 </body>
 </html>
