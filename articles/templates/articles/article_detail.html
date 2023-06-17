@@ -1,39 +1,47 @@
 {% extends 'base_layout.html' %} 
+
 {% block styles-article-detail %}
 <style>
-.article-detail {
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  padding: 20px;
-  transition: transform 0.3s ease;
-}
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-.article-detail:hover {
-  transform: scale(1.05);
-}
-
-.article-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.article-title {
-  font-size: 24px;
-  color: #333;
-  margin-top: 20px;
-}
-
-.article-body {
-  color: #555;
-  line-height: 1.6;
-  margin-top: 10px;
-}
-
-.article-date {
-  color: #777;
-  margin-top: 10px;
-}
+  .article-detail {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 3px solid #555; 
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .article-detail:hover {
+    transform: scale(1.05);
+  }
+  
+  .article-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .article-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .article-body {
+    font-family: 'Roboto', sans-serif;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+  
+  .article-date {
+    font-family: 'Roboto', sans-serif;
+    color: #777;
+    margin-top: 10px;
+  }
 </style>
 {% endblock styles-article-detail %}
 
