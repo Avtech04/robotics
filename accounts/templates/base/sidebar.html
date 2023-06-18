@@ -2,9 +2,15 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
+  {% if user.is_staff%}
   <a href="#" class="brand-link">
     <span class="brand-text font-weight-light">Admin Panel</span>
   </a>
+  {% else %}
+  <a href="#" class="brand-link">
+    <span class="brand-text font-weight-light">User Panel</span>
+  </a>
+  {% endif %}
 
   <!-- Sidebar -->
   <div class="sidebar">
@@ -38,7 +44,7 @@
             <p>Dashboard</p>
           </a>
         </li>
-
+        {% if user.is_staff%}
         <!-- 1. Events-->
         <li class="nav-item has-treeview menu-open">
           <a href="" class="nav-link">
@@ -57,6 +63,7 @@
             </li>
           </ul>
         </li>
+        {% endif %}
         <li class="nav-item has-treeview menu-open">
           <a href="/events" class="nav-link">
             <i class="nav-icon fas fa-handshake"></i>

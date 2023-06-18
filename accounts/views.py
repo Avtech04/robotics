@@ -12,6 +12,8 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 from events.models import Event
 from articles.models import Article
@@ -32,22 +34,7 @@ def home(request):
     art = Article.objects.all().count()
     return render(request , 'dashboard.html',{'conts': content, 'num': size,**context, 'list': quant , 'article_count': art})
 
-# def contacts(request):
-#     try:
-#         if request.method == "POST":
-#             name = request.POST.get('name')
-#             email = request.POST.get('email')
-#             subject = request.POST.get('subject')
-#             message = request.POST.get('message')
-#             Feedback = feedback(name=name, email=email, subject=subject, message=message, date= datetime.today())
-#             Feedback.save()
-#             messages.success("Your feedback is submitted!")
-#             return render(request, 'thanks.html')
-#         else:
-#             return render(request, 'contacts.html')
-#     except Exception as e:
-#         return HttpResponse(f"An error occurred: {e}")
-
+@staff_member_required
 def user_list(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="user_list.csv"'
@@ -60,11 +47,13 @@ def user_list(request):
         if user.is_staff == 0:
             writer.writerow([user.username, user.email])
     return response
-    
+
+@staff_member_required
 def usersDetail(request):
     users = User.objects.all()
     return render(request, 'usersDetail.html',{'users': users})
 
+@staff_member_required
 def delete_user(request,username):
     try:
         user = User.objects.get(username=username)
@@ -76,6 +65,7 @@ def delete_user(request,username):
 
 
 
+@staff_member_required
 def modify_user(request, username):
     if request.method == 'POST':
         
@@ -87,9 +77,6 @@ def modify_user(request, username):
         user.save()
         return HttpResponseRedirect(reverse('usersDetail'))
     
-def contacts(request):
-    return render(request, 'contacts.html')
-
 
 def login_attempt(request):
     if request.method == 'POST':
@@ -104,9 +91,9 @@ def login_attempt(request):
         
         profile_obj = Profile.objects.filter(user = user_obj ).first()
 
-        if not profile_obj.is_verified:
-            messages.success(request, 'Profile is not verified check your mail.')
-            return redirect('/accounts/login')
+        # if not profile_obj.is_verified:
+        #     messages.success(request, 'Profile is not verified check your mail.')
+        #     return redirect('/accounts/login')
 
         user = authenticate(username = username , password = password)
         if user is None:
@@ -164,16 +151,16 @@ def verify(request , auth_token):
         profile_obj = Profile.objects.filter(auth_token = auth_token).first()
     
 
-        if profile_obj:
-            if profile_obj.is_verified:
-                messages.success(request, 'Your account is already verified.')
-                return redirect('/accounts/login')
-            profile_obj.is_verified = True
-            profile_obj.save()
-            messages.success(request, 'Your account has been verified.')
-            return redirect('/accounts/login')
-        else:
-            return redirect('/error')
+        # if profile_obj:
+        #     if profile_obj.is_verified:
+        #         messages.success(request, 'Your account is already verified.')
+        #         return redirect('/accounts/login')
+        #     profile_obj.is_verified = True
+        #     profile_obj.save()
+        #     messages.success(request, 'Your account has been verified.')
+        #     return redirect('/accounts/login')
+        # else:
+        #     return redirect('/error')
     except Exception as e:
         print(e)
         return redirect('/')

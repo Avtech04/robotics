@@ -68,6 +68,7 @@ a{
     <!-- ./col -->
     
     <!-- ./col -->
+    {% if user.is_staff %}
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-secondary">
@@ -87,6 +88,7 @@ a{
         <a href="{% url 'usersDetail' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
+    {% endif %}
 
     {% comment %} This Content is organized by Kamal Ahmad {% endcomment %}
     <div class="col-lg-3 col-6">

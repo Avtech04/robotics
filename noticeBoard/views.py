@@ -7,11 +7,14 @@ from .forms import noticeaddition
 from django.urls import reverse
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 
 
 # Create your views here.
 @login_required
+@staff_member_required
 def broadcast(request, id):
     if request.method == "POST":
         pi = AdminNotice.objects.get(pk=id)
@@ -27,6 +30,7 @@ def broadcast(request, id):
     return HttpResponseRedirect(reverse('adminNotice'))
     
 @login_required
+@staff_member_required
 def addNotice(request):
     if request.method == "POST":
         notice = noticeaddition(request.POST)
@@ -45,6 +49,7 @@ def adminNotice(request):
     return render(request, 'adminNotice.html', {'conts': content})
 
 @login_required
+@staff_member_required
 def update_data(request, id):
     if request.method == "POST":
         pi = AdminNotice.objects.get(pk=id)
@@ -58,6 +63,7 @@ def update_data(request, id):
     return render(request,'updateform.html', { 'form':notice})
 
 @login_required
+@staff_member_required
 def delete_data(request,id):
     if request.method == "POST":
         pi = AdminNotice.objects.get(pk=id)
